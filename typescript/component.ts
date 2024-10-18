@@ -1,4 +1,4 @@
-import { Action, Image } from "./action";
+import { Action, Image, VideoCta, ButtonCta } from "./action";
 
 type AdditionalParam = {
   title: string;
@@ -64,7 +64,7 @@ type Widget = {
 }
 
 export type Component = {
-  hero_banner: Banner;
+  product_hero_block?: ProductHero;
   section?: SectionProps;
   section_with_buckets?: SectionWithBucket;
   from_blog?: FeaturedBlogData;
@@ -86,13 +86,16 @@ export type Cards = {
     cards: Card;
   }
   
-export type Banner = {
-    banner_title:string;
-    banner_description: string;
-    bg_color: string;
-    call_to_action: Action;
-    banner_image: Image;
-    text_color: string;
+export type Product = {
+  name: string;
+}
+
+export type ProductHero = {
+    title:string;
+    strapline: string;
+    images: [Image];
+    button: ButtonCta;
+    video: VideoCta;
     $: AdditionalParam;
   }
   

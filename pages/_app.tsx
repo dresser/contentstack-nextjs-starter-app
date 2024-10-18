@@ -45,7 +45,7 @@ function MyApp(props: Props) {
       <Head>
         <meta
           name='application-name'
-          content='Contentstack-Nextjs-Starter-App'
+          content='Matts Contentstack Content Modelling Assignment Site'
         />
         <meta charSet='utf-8' />
         <meta httpEquiv='X-UA-Compatible' content='IE=edge' />
@@ -54,17 +54,21 @@ function MyApp(props: Props) {
           content='width=device-width,initial-scale=1,minimum-scale=1'
         />
         <meta name='theme-color' content='#317EFB' />
-        <title>Contentstack-Nextjs-Starter-App</title>
-        {page?.seo && page.seo.enable_search_indexing && metaData(page.seo)}
+        <title>{page?.seo && page.seo.title}</title>
+        <meta name='description' content={page?.seo?.title} />
+        {page?.seo && page.seo.no_follow && metaData(page.seo)}
       </Head>
       <Layout
         header={header}
         footer={footer}
         page={page}
-        blogPost={blogPost}
-        blogList={blogList}
         entries={entries}
       >
+                {/*
+        blogPost={blogPost}
+        blogList={blogList}
+        */}
+
         <Component {...pageProps} />
       </Layout>
     </>

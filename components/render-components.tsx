@@ -15,20 +15,16 @@ export default function RenderComponents(props: RenderProps) {
   const { pageComponents, blogPost, entryUid, contentTypeUid, locale } = props;
   return (
     <div
+      className='max-width'
       data-pageref={entryUid}
       data-contenttype={contentTypeUid}
       data-locale={locale}
     >
       {pageComponents?.map((component, key: number) => {
-        if (component.hero_banner) {
-          return blogPost ? (
-            <BlogBanner
-              blogBanner={component.hero_banner}
-              key={`component-${key}`}
-            />
-          ) : (
+        if (component.product_hero_block) {
+          return (
             <HeroBanner
-              banner={component.hero_banner}
+              hero={component.product_hero_block}
               key={`component-${key}`}
             />
           );

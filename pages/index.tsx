@@ -28,7 +28,7 @@ export default function Home(props: Props) {
   return getEntry ? (
     <RenderComponents
       pageComponents={getEntry.page_components}
-      contentTypeUid='page'
+      contentTypeUid='home_page'
       entryUid={getEntry.uid}
       locale={getEntry.locale}
     />
@@ -39,11 +39,12 @@ export default function Home(props: Props) {
 
 export async function getServerSideProps(context: Context) {
   try {
+    console.log(context);
     const entryRes = await getPageRes(context.resolvedUrl);
     return {
       props: {
         entryUrl: context.resolvedUrl,
-        page: entryRes,
+        page: entryRes ?? null,
       },
     };
   } catch (error) {

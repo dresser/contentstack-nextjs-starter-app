@@ -95,7 +95,7 @@ header .wrapper-logo {
 }
 
 header .wrapper-logo img {
-  width: 130px;
+  width: 70px;
 }
 
 header nav {
@@ -137,7 +137,7 @@ footer {
 }
 
 footer a {
-  color: #222222;
+  color: #fff;
   padding: 12px;
 }
 
@@ -148,6 +148,16 @@ footer a {
 }
 
 .footer-nav-li {
+  padding: 0;
+}
+
+.footer-nav-li ul li {
+  display: list-item;
+  list-style: none;
+  padding: 0;
+}
+
+.footer-nav-li ul li a {
   padding: 0;
 }
 

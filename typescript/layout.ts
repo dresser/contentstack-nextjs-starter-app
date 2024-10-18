@@ -21,23 +21,20 @@ type Announcement = {
   $: AdditionalParam;
 }
 
-type PageRef = {
+export type PageRef = {
   title: string;
   url: string;
   $: AdditionalParam;
 }
 
-type Share = {
+type SocialLink = {
   link: Links;
   icon: Image;
 }
 
-type Social = {
-  social_share: [Share];
-}
-
-type Navigation = {
-  link: [Links];
+type NavigationItem = {
+  label: string;
+  links: [Links];
 }
 
 type Author = {
@@ -74,10 +71,9 @@ export type HeaderProps = {
   notification_bar: Announcement;
   title: string;
   uid: string;
-  social: Social;
-  navigation: Navigation;
   copyright: string;
   $: AdditionalParam;
+  account_buttons:[Button];
 }
 
 export type Entry = [
@@ -89,6 +85,13 @@ type List = {
   page_reference: [PageRef];
   $: {};
   href?: string;
+  sub_items:[List];
+}
+
+type Button = {
+  title?: string;
+  popup_type?: string;
+  button_style?: string;
 }
 
 export type NavLinks = {
@@ -112,14 +115,12 @@ export type PageProps = {
 }
 
 export type FooterProps = {
-  logo: Image;
+  footer_image: Image;
   title: string;
-  social: Social;
-  navigation: Navigation;
+  social: [SocialLink];
+  navigation: [NavigationItem];
   copyright: string;
   locale: string, 
-  navigation_menu: [List];
-  notification_bar: Announcement; 
   uid: string;
   $: AdditionalParam;
 }

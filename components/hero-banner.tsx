@@ -1,83 +1,67 @@
 import React from 'react';
 import Link from 'next/link';
-import { Image, Action } from "../typescript/action";
+import parse from 'html-react-parser';
+import { Image, Action, VideoCta, ButtonCta } from "../typescript/action";
 
 type AdditionalParam = {
-  banner_title: string;
-  banner_description: string;
+  title: string;
+  strapline: string;
 }
 
-type Banner = {
-  bg_color: string;
-  text_color: string;
-  banner_title: string;
-  banner_description: string;
-  call_to_action: Action;
-  banner_image: Image;
+type ProductHero = {
+  title:string;
+  strapline: string;
+  images: [Image];
+  button: ButtonCta;
+  video: VideoCta;
   $: AdditionalParam;
 }
 
-type BannerProps = {
-  banner: Banner;
-}
+export default function HeroBanner({ hero }: {hero : ProductHero}) {
 
-export default function HeroBanner(props: BannerProps) {
-
-  const banner = props.banner;
+  const banner = hero;
+  const firstImage = banner.images[0];
 
   return (
-    <div
-      className='hero-banner'
-      style={{
-        background: banner?.bg_color ? banner.bg_color : '',
-      }}
-    >
-      <div
-        className='home-content'
-        style={{
-          color: banner?.text_color ? banner.text_color : '#000',
-        }}
-      >
-        {banner.banner_title && (
-          <h1 className='hero-title' {...banner.$?.banner_title as {}}>
-            {banner.banner_title}
-          </h1>
+    <div className='row mb-2'>
+      <div className='col-md-6'>
+        {banner.title && (
+          <div {...banner.$?.title as {}}>{parse(banner.title)}</div>
         )}
-        {banner.banner_description ? (
-          <p
-            className='hero-description '
-            style={{
-              color: banner?.text_color ? banner.text_color : '#222',
-            }}
-            {...banner.$?.banner_description as {}}
-          >
-            {banner?.banner_description}
+        {banner.strapline ? (
+          <p {...banner.$?.strapline as {}}>
+            {banner?.strapline}
           </p>
         ) : (
           ''
         )}
-        {banner.call_to_action.title && banner.call_to_action.href ? (
-          (<Link
-            href={banner?.call_to_action.href}
-            className='btn tertiary-btn'
-            {...banner.call_to_action.$?.title}>
+        <div className='cta-wrapper'>
+          {banner.button.title && banner.button.link[0]?.url ? (
+            (<Link
+              href={banner?.button.link[0].url}
+              className='btn tertiary-btn'>
 
-            {banner?.call_to_action.title}
+              {banner?.button.title}
 
-          </Link>)
+            </Link>)
+          ) : (
+            ''
+          )}
+        </div>
+      </div>
+      <div className='col-md-6'>
+        {firstImage ? (
+          <img
+            alt={firstImage.filename}
+            src={firstImage.url}
+            width="800px"
+            height="600px"
+            {...firstImage.$?.url as {}}
+          />
         ) : (
           ''
         )}
       </div>
-      {banner.banner_image ? (
-        <img
-          alt={banner.banner_image.filename}
-          src={banner.banner_image.url}
-          {...banner.banner_image.$?.url as {}}
-        />
-      ) : (
-        ''
-      )}
     </div>
   );
 }

@@ -66,15 +66,6 @@ const DevTools = ({ response }: any) => {
               onClick={(e) => copyObject(JSON.stringify(filteredJson))}
               aria-hidden="true"
             >
-              <Tooltip
-                content={forceUpdate === 0 ? 'Copy' : 'Copied'}
-                direction="top"
-                dynamic
-                delay={200}
-                status={forceUpdate}
-              >
-                <img src="/copy.svg" alt="copy icon" />
-              </Tooltip>
             </span>
             <button
               type="button"

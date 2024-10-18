@@ -34,27 +34,28 @@ export const getFooterRes = async (): Promise<FooterProps> => {
 
 export const getAllEntries = async (): Promise<Page[]> => {
   const response = (await getEntry({
-    contentTypeUid: "page",
+    contentTypeUid: "home_page",
     referenceFieldPath: undefined,
     jsonRtePath: undefined,
   })) as Page[][];
   liveEdit &&
-    response[0].forEach((entry) => addEditableTags(entry, "page", true));
+    response[0].forEach((entry) => addEditableTags(entry, "home_page", true));
   return response[0];
 };
 
 export const getPageRes = async (entryUrl: string): Promise<Page> => {
   const response = (await getEntryByUrl({
-    contentTypeUid: "page",
+    contentTypeUid: "home_page",
     entryUrl,
-    referenceFieldPath: ["page_components.from_blog.featured_blogs"],
+    referenceFieldPath: [
+      "page_components.product_hero_block.selected_product",
+      "page_components.product_hero_block.button.link"
+    ],
     jsonRtePath: [
-      "page_components.from_blog.featured_blogs.body",
-      "page_components.section_with_buckets.buckets.description",
-      "page_components.section_with_html_code.description",
+      "page_components.product_hero_block.title"
     ],
   })) as Page[];
-  liveEdit && addEditableTags(response[0], "page", true);
+  liveEdit && addEditableTags(response[0], "home_page", true);
   return response[0];
 };
 

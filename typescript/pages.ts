@@ -46,7 +46,10 @@ type PageProps = {
 }
 
 type Seo = {
-  enable_search_indexing: boolean
+  no_index: boolean,
+  no_follow: boolean,
+  title: string,
+  description: string
 }
 
 type Blog = {

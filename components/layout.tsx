@@ -8,17 +8,17 @@ export default function Layout({
   header,
   footer,
   page,
-  blogPost,
-  blogList,
+  //blogPost,
+  //blogList,
   entries,
   children,
-}: { header: HeaderProps, footer: FooterProps, page: PageProps, blogPost: Posts, blogList: Posts, entries: Entry, children: ChilderenProps }) {
+}: { header: HeaderProps, footer: FooterProps, page: PageProps, /*blogPost: Posts, blogList: Posts,*/ entries: Entry, children: ChilderenProps }) {
 
   const [getLayout, setLayout] = useState({ header, footer });
   const jsonObj: any = { header, footer };
   page && (jsonObj.page = page);
-  blogPost && (jsonObj.blog_post = blogPost);
-  blogList && (jsonObj.blog_post = blogList);
+  //blogPost && (jsonObj.blog_post = blogPost);
+  //blogList && (jsonObj.blog_post = blogList);
 
   function buildNavigation(ent: Entry, hd: HeaderProps, ft: FooterProps) {
     let newHeader = { ...hd };
@@ -37,6 +37,7 @@ export default function Layout({
             $: {},
           });
         }
+        /*
         const fFound = newFooter?.navigation.link.find(
           (nlink: Links) => nlink.title === entry.title
         );
@@ -47,6 +48,7 @@ export default function Layout({
             $: entry.$,
           });
         }
+          */
       });
     }
     return [newHeader, newFooter];
@@ -57,17 +59,21 @@ export default function Layout({
       const [newHeader, newFooter] = buildNavigation(entries, header, footer);
       setLayout({ header: newHeader, footer: newFooter });
     }
-  }, [header, footer]);
+  }, [header]); //, footer]);
 
   return (
     <>
       {header ? <Header header={getLayout.header} entries={entries} /> : ''}
+      
       <main className='mainClass'>
         <>
+        
         {children}
+        
         {Object.keys(jsonObj).length && <DevTools response={jsonObj} />}
         </>
       </main>
+      
       {footer ? <Footer footer={getLayout.footer} entries={entries} /> : ''}
     </>
   );

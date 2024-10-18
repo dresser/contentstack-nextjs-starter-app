@@ -12,6 +12,7 @@ export default function Footer({ footer, entries }: {footer: FooterProps, entrie
   
   function buildNavigation(ent: Entry, ft: FooterProps) {
     let newFooter = { ...ft };
+    /*
     if (ent.length !== newFooter.navigation.link.length) {
       ent.forEach((entry) => {
         const fFound = newFooter?.navigation.link.find(
@@ -25,7 +26,7 @@ export default function Footer({ footer, entries }: {footer: FooterProps, entrie
           });
         }
       });
-    }
+    }*/
     return newFooter;
   }
 
@@ -48,17 +49,17 @@ export default function Footer({ footer, entries }: {footer: FooterProps, entrie
   const footerData = getFooter ? getFooter : undefined;
 
   return (
-    <footer>
-      <div className='max-width footer-div'>
-        <div className='col-quarter'>
-          {footerData && footerData.logo ? (
+    <footer className='text-white bg-dark'>
+      <div className='max-width footer-div row'>
+        <div className='col-6'>
+          {footerData && footerData.footer_image ? (
             (<Link href='/' className='logo-tag'>
 
               <img
-                src={footerData.logo.url}
+                src={footerData.footer_image.url}
                 alt={footerData.title}
                 title={footerData.title}
-                {...footer.logo.$?.url as {}}
+                {...footer.footer_image.$?.url as {}}
                 className='logo footer-logo'
               />
 
@@ -67,46 +68,50 @@ export default function Footer({ footer, entries }: {footer: FooterProps, entrie
             <Skeleton width={150} />
           )}
         </div>
-        <div className='col-half'>
-          <nav>
-            <ul className='nav-ul'>
+        <div className='col-6'>
+          <div className='row'>
               {footerData ? (
-                footerData.navigation.link.map((menu) => (
-                  <li
-                    className='footer-nav-li'
-                    key={menu.title}
-                    {...menu.$?.title}
-                  >
-                    <Link href={menu.href} legacyBehavior>{menu.title}</Link>
-                  </li>
+                footerData.navigation.map((menuItem, index) => (
+                  <>
+                  <div className='col-4' key={menuItem.label}>
+                    {menuItem.label}
+                    <ul>
+                    {footerData.navigation[index].links.map((menuItemLink) => (
+                        <li key={menuItemLink.title}>
+                          <Link href={menuItemLink.href} legacyBehavior>{menuItemLink.title}</Link>
+                        </li>
+                      ))
+                    }
+                    </ul>
+                  </div>
+                  </>
                 ))
               ) : (
                 <Skeleton width={300} />
               )}
-            </ul>
-          </nav>
-        </div>
-        <div className='col-quarter social-link'>
-          <div className='social-nav'>
-            {footerData ? (
-              footerData.social?.social_share.map((social) => (
-                <a
-                  href={social.link.href}
-                  title={social.link.title}
-                  key={social.link.title}
-                >
-                  {social.icon && (
-                    <img
-                      src={social.icon.url}
-                      alt={social.link.title}
-                      {...social.icon.$?.url as {}}
-                    />
-                  )}
-                </a>
-              ))
-            ) : (
-              <Skeleton width={200} />
-            )}
+          </div>
+          <div className='row'>
+            <div className='col-4 align-self-end'>
+              {footerData ? (
+                footerData.social?.map((social) => (
+                  <a
+                    href={social.link.href}
+                    title={social.link.title}
+                    key={social.link.title}
+                  >
+                    {social.icon && (
+                      <img
+                        src={social.icon.url}
+                        alt={social.link.title}
+                        {...social.icon.$?.url as {}}
+                      />
+                    )}
+                  </a>
+                ))
+              ) : (
+                <Skeleton width={200} />
+              )}
+            </div>
           </div>
         </div>
       </div>

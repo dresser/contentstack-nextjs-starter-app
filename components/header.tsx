@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import parse from 'html-react-parser';
-import Tooltip from './tool-tip';
 import { onEntryChange } from '../contentstack-sdk';
 import { getHeaderRes } from '../helper';
 import Skeleton from 'react-loading-skeleton';
@@ -20,6 +19,7 @@ export default function Header({ header, entries }: {header: HeaderProps, entrie
             const hFound = newHeader?.navigation_menu.find(
               (navLink: NavLinks) => navLink.label === entry.title
             );
+            /*
             if (!hFound) {
               newHeader.navigation_menu?.push({
                 label: entry.title,
@@ -29,6 +29,7 @@ export default function Header({ header, entries }: {header: HeaderProps, entrie
                 $:{}
               });
             }
+              */
           });
     }
     return newHeader
@@ -55,17 +56,6 @@ export default function Header({ header, entries }: {header: HeaderProps, entrie
   
   return (
     <header className='header'>
-      <div className='note-div'>
-        {headerData?.notification_bar.show_announcement ? (
-          typeof headerData.notification_bar.announcement_text === 'string' && (
-            <div {...headerData.notification_bar.$?.announcement_text as {}}>
-              {parse(headerData.notification_bar.announcement_text)}
-            </div>
-          )
-        ) : (
-          <Skeleton />
-        )}
-      </div>
       <div className='max-width header-div'>
         <div className='wrapper-logo'>
           {headerData ? (
@@ -91,17 +81,17 @@ export default function Header({ header, entries }: {header: HeaderProps, entrie
         <nav className='menu'>
           <ul className='nav-ul header-ul'>
             {headerData ? (
-              headerData.navigation_menu.map((list) => {
+              headerData.navigation_menu.map((listItem) => {
                 const className =
-                  router.asPath === list.page_reference[0].url ? 'active' : '';
+                  router.asPath === listItem.page_reference[0].url ? 'active' : '';
                 return (
                   <li
-                    key={list.label}
+                    key={listItem.label}
                     className='nav-li'
-                    {...list.page_reference[0].$?.url as {}}
+                    {...listItem.page_reference[0].$?.url as {}}
                   >
-                    <Link href={list.page_reference[0].url} className={className}>
-                      {list.label}
+                    <Link href={listItem.page_reference[0].url} className={className}>
+                      {listItem.label}
                     </Link>
                   </li>
                 );
@@ -111,14 +101,23 @@ export default function Header({ header, entries }: {header: HeaderProps, entrie
             )}
           </ul>
         </nav>
-
-        <div className='json-preview'>
-          <Tooltip content='JSON Preview' direction='top' dynamic={false} delay={200} status={0}>
-            <span data-bs-toggle='modal' data-bs-target='#staticBackdrop'>
-              <img src='/json.svg' alt='JSON Preview icon' />
-            </span>
-          </Tooltip>
-        </div>
+        <nav>
+        <ul className='nav-ul header-ul'>
+          {headerData ? (
+              headerData.account_buttons.map((list) => {
+                return (
+              <li>
+                <button type="button" className={'btn ' + list.button_style}>
+                  {list.title}
+                </button>
+              </li>
+                );
+              })
+            ) : (
+              <Skeleton width={300} />
+            )}
+        </ul>
+        </nav>
       </div>
     </header>
   );
