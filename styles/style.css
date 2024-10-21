@@ -141,6 +141,25 @@ footer a {
   padding: 12px;
 }
 
+footer .footer-menu .footer-menu-header {
+  font-weight: bold;
+  font-size: 22px;
+}
+
+footer .footer-menu  ul {
+  padding-left: 0;
+}
+
+footer .footer-menu ul li {
+  list-style-type: none;
+  margin: 30px 0 30px 0;
+}
+
+footer .footer-menu ul li a {
+  padding: 0;
+  font-size: 16px;
+}
+
 .footer-div {
   display: flex;
   flex-wrap: wrap;
@@ -153,7 +172,6 @@ footer a {
 
 .footer-nav-li ul li {
   display: list-item;
-  list-style: none;
   padding: 0;
 }
 

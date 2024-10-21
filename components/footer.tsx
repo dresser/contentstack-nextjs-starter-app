@@ -71,11 +71,11 @@ export default function Footer({ footer, entries }: {footer: FooterProps, entrie
           )}
         </div>
         <div className='col-6'>
-          <div className='row'>
+          <div className='row mt-5'>
               {footerData ? (
                 footerData.navigation.map((menuItem, index) => (
-                  <div className='col-4' key={menuItem.label}>
-                    {menuItem.label}
+                  <div className='col-4 footer-menu' key={menuItem.label}>
+                    <div className='footer-menu-header'>{menuItem.label}</div>
                     <ul>
                     {footerData.navigation[index].links.map((menuItemLink) => (
                         <li key={menuItemLink.title}>
