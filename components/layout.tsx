@@ -32,8 +32,7 @@ export default function Layout({
             label: entry.title,
             page_reference: [
               { title: entry.title, url: entry.url, $: entry.$ },
-            ],
-            $: {},
+            ]
           });
         }
         /*

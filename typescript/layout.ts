@@ -67,7 +67,7 @@ export type Posts = {
 export type HeaderProps = {
   locale:string;
   logo: Image;
-  navigation_menu:[List]
+  navigation_menu:[HeaderNavItem]
   notification_bar: Announcement;
   title: string;
   uid: string;
@@ -80,12 +80,12 @@ export type Entry = [
   entry: EntryData
 ]
 
-type List = {
+export type HeaderNavItem = {
   label?: string;
   page_reference: [PageRef];
-  $: {};
-  href?: string;
-  subitems:[List];
+  //$: {};
+  //href?: string;
+  subitems?:[HeaderNavItem];
 }
 
 type Button = {

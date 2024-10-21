@@ -5,7 +5,7 @@ import parse from 'html-react-parser';
 import { onEntryChange } from '../contentstack-sdk';
 import { getHeaderRes } from '../helper';
 import Skeleton from 'react-loading-skeleton';
-import { HeaderProps, Entry, NavLinks } from "../typescript/layout";
+import { HeaderProps, Entry, NavLinks, HeaderNavItem } from "../typescript/layout";
 
 export default function Header({ header, entries }: {header: HeaderProps, entries: Entry}) {
 
@@ -25,8 +25,8 @@ export default function Header({ header, entries }: {header: HeaderProps, entrie
                 label: entry.title,
                 page_reference: [
                   { title: entry.title, url: entry.url, $: entry.$ },
-                ],
-                $:{}
+                ]//,
+                //subitems: [] as HeaderNavItem[]
               });
             }
             
