@@ -85,7 +85,7 @@ type List = {
   page_reference: [PageRef];
   $: {};
   href?: string;
-  sub_items:[List];
+  subitems:[List];
 }
 
 type Button = {

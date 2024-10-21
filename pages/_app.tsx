@@ -10,7 +10,7 @@ import '../styles/style.css';
 import 'react-loading-skeleton/dist/skeleton.css';
 import '@contentstack/live-preview-utils/dist/main.css';
 import { Props } from "../typescript/pages";
-
+import { StrictMode } from 'react';
 
 Router.events.on('routeChangeStart', () => NProgress.start());
 Router.events.on('routeChangeComplete', () => NProgress.done());
@@ -42,6 +42,7 @@ function MyApp(props: Props) {
   const blogList: any = posts?.concat(archivePost);
   return (
     <>
+    <StrictMode>
       <Head>
         <meta
           name='application-name'
@@ -71,6 +72,7 @@ function MyApp(props: Props) {
 
         <Component {...pageProps} />
       </Layout>
+      </StrictMode>
     </>
   );
 }
