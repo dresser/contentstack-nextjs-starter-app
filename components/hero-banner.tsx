@@ -2,7 +2,9 @@ import React from 'react';
 import Link from 'next/link';
 import parse from 'html-react-parser';
 import { Image, Action, VideoCta, ButtonCta } from "../typescript/action";
+import {ProductHero } from "../typescript/component"
 
+{/*
 type AdditionalParam = {
   title: string;
   strapline: string;
@@ -16,6 +18,7 @@ type ProductHero = {
   video: VideoCta;
   $: AdditionalParam;
 }
+*/}
 
 export default function HeroBanner({ hero }: {hero : ProductHero}) {
 
@@ -29,7 +32,7 @@ export default function HeroBanner({ hero }: {hero : ProductHero}) {
           <div {...banner.$?.title as {}}>{parse(banner.title)}</div>
         )}
         {banner.strapline ? (
-          <p {...banner.$?.strapline as {}}>
+          <p>
             {banner?.strapline}
           </p>
         ) : (
