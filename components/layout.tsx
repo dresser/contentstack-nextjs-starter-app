@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Header from './header';
 import Footer from './footer';
-import DevTools from './devtools';
 import { HeaderProps, FooterProps, PageProps, Posts, ChilderenProps, Entry, NavLinks, Links } from "../typescript/layout";
 
 export default function Layout({
@@ -67,10 +66,7 @@ export default function Layout({
       
       <main className='mainClass'>
         <>
-        
         {children}
-        
-        {Object.keys(jsonObj).length && <DevTools response={jsonObj} />}
         </>
       </main>
       
