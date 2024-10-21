@@ -5,6 +5,7 @@ import { onEntryChange } from '../contentstack-sdk';
 import { getFooterRes } from '../helper';
 import Skeleton from 'react-loading-skeleton';
 import { FooterProps, Entry, Links } from "../typescript/layout";
+import { StrictMode } from 'react';
 
 export default function Footer({ footer, entries }: {footer: FooterProps, entries: Entry}) {
 
@@ -49,7 +50,8 @@ export default function Footer({ footer, entries }: {footer: FooterProps, entrie
   const footerData = getFooter ? getFooter : undefined;
 
   return (
-    <footer className='text-white bg-dark'>
+    <footer className='text-white bg-dark' key={Math.random()}>
+      <StrictMode>
       <div className='max-width footer-div row'>
         <div className='col-6'>
           {footerData && footerData.footer_image ? (
@@ -72,7 +74,6 @@ export default function Footer({ footer, entries }: {footer: FooterProps, entrie
           <div className='row'>
               {footerData ? (
                 footerData.navigation.map((menuItem, index) => (
-                  <>
                   <div className='col-4' key={menuItem.label}>
                     {menuItem.label}
                     <ul>
@@ -84,7 +85,6 @@ export default function Footer({ footer, entries }: {footer: FooterProps, entrie
                     }
                     </ul>
                   </div>
-                  </>
                 ))
               ) : (
                 <Skeleton width={300} />
@@ -124,6 +124,7 @@ export default function Footer({ footer, entries }: {footer: FooterProps, entrie
           <Skeleton width={500} />
         </div>
       )}
+      </StrictMode>
     </footer>
   );
 }

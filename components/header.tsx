@@ -19,7 +19,7 @@ export default function Header({ header, entries }: {header: HeaderProps, entrie
             const hFound = newHeader?.navigation_menu.find(
               (navLink: NavLinks) => navLink.label === entry.title
             );
-            /*
+            
             if (!hFound) {
               newHeader.navigation_menu?.push({
                 label: entry.title,
@@ -29,7 +29,7 @@ export default function Header({ header, entries }: {header: HeaderProps, entrie
                 $:{}
               });
             }
-              */
+            
           });
     }
     return newHeader
@@ -106,7 +106,7 @@ export default function Header({ header, entries }: {header: HeaderProps, entrie
           {headerData ? (
               headerData.account_buttons.map((list) => {
                 return (
-              <li>
+              <li key={list.title}>
                 <button type="button" className={'btn ' + list.button_style}>
                   {list.title}
                 </button>
