@@ -13,7 +13,9 @@ export default function Layout({
   children,
 }: { header: HeaderProps, footer: FooterProps, page: PageProps, /*blogPost: Posts, blogList: Posts,*/ entries: Entry, children: ChilderenProps }) {
 
-  const [getLayout, setLayout] = useState({ header, footer });
+  //const [getLayout, setLayout] = useState({ header, footer });
+  const [getHeader, setHeader] = useState(header);
+  const [getFooter, setFooter] = useState(footer);
   const jsonObj: any = { header, footer };
   page && (jsonObj.page = page);
   //blogPost && (jsonObj.blog_post = blogPost);
@@ -52,16 +54,45 @@ export default function Layout({
     return [newHeader, newFooter];
   }
 
+  function buildHeader(ent: Entry, hd: HeaderProps) {
+    let newHeader = { ...hd };
+    if (ent.length !== newHeader.navigation_menu.length) {
+      ent.forEach((entry) => {
+        const hFound = newHeader?.navigation_menu.find(
+          (navLink: NavLinks) => navLink.label === entry.title
+        );
+        if (!hFound) {
+          newHeader.navigation_menu?.push({
+            label: entry.title,
+            page_reference: [
+              { title: entry.title, url: entry.url, $: entry.$ },
+            ]
+          });
+        }
+      });
+    }
+    return newHeader;
+  }
+
+  function buildFooter(ent: Entry, ft: FooterProps) {
+    let newFooter = { ...ft };
+    return newFooter;
+  }
+
   useEffect(() => {
     if (footer && header && entries) {
-      const [newHeader, newFooter] = buildNavigation(entries, header, footer);
-      setLayout({ header: newHeader, footer: newFooter });
+      //const [newHeader, newFooter] = buildNavigation(entries, header, footer);
+      //setLayout({ header: newHeader, footer: newFooter });
+      const newFooter = buildFooter(entries, footer);
+      setFooter(newFooter);
+      const newHeader = buildHeader(entries, header);
+      setHeader(newHeader);
     }
   }, [header]); //, footer]);
 
   return (
     <>
-      {header ? <Header header={getLayout.header} entries={entries} /> : ''}
+      {header ? <Header header={getHeader} entries={entries} /> : ''}
       
       <main className='mainClass'>
         <>
@@ -69,7 +100,7 @@ export default function Layout({
         </>
       </main>
       
-      {footer ? <Footer footer={getLayout.footer} entries={entries} /> : ''}
+      {footer ? <Footer footer={getFooter} entries={entries} /> : ''}
     </>
   );
 }
