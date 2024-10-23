@@ -5,7 +5,7 @@ import { ProductHero } from "../typescript/component"
 import { ProductPage } from '../typescript/product';
 import { useState } from 'react';
 
-export default function HeroBanner({ hero }: {hero : ProductHero}) {
+export default function ProductHeroBlock({ hero }: {hero : ProductHero}) {
 
   const banner = hero;
   const [imageIndex, setImageIndex] = useState(0);

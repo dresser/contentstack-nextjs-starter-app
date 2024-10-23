@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Section from './section';
-import HeroBanner from './hero-banner';
+import ProductHeroBlock from './product-hero-block';
 import BlogBanner from './blog-banner';
 import CardSection from './card-section';
 import TeamSection from './team-section';
@@ -23,7 +23,7 @@ export default function RenderComponents(props: RenderProps) {
       {pageComponents?.map((component, key: number) => {
         if (component.product_hero_block) {
           return (
-            <HeroBanner
+            <ProductHeroBlock
               hero={component.product_hero_block}
               key={`component-${key}`}
             />
