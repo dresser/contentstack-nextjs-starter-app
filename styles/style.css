@@ -1380,3 +1380,33 @@ footer .footer-menu ul li a {
 .string-value {
   color: #5d9ccb;
 }
+
+.scroll-wrapper-index {
+  font-size: 80px;
+  line-height: normal;
+}
+
+.product-attribute {
+  border: 1px solid black;
+  padding: 15px;
+}
+
+.product-attribute .product-attribute-value {
+  font-weight: bold;
+  margin-bottom: 15px;
+  text-align: center;
+}
+.product-attribute .product-attribute-value .product-attribute-value-number {
+  font-size: 30px;
+  margin-right: 5px;
+}
+
+.product-attribute .product-attribute-value .product-attribute-value-unit {
+  font-size: 18px;
+  margin-left: 5px;
+}
+
+.product-attribute .product-attribute-property {
+  font-size: 12px;
+  text-align: center;
+}

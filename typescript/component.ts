@@ -1,4 +1,5 @@
 import { Action, Image, VideoCta, ButtonCta } from "./action";
+import { ProductPage } from "./product";
 
 type AdditionalParam = {
   title: string;
@@ -97,6 +98,7 @@ export type ProductHero = {
     button: ButtonCta;
     video: VideoCta;
     $: AdditionalParam;
+    selected_product: [ProductPage];
   }
   
 export type AdditionalParamProps = {
