@@ -1410,3 +1410,11 @@ footer .footer-menu ul li a {
   font-size: 12px;
   text-align: center;
 }
+
+.product-color-block .title-block {
+  text-align: center;
+}
+
+.product-color-block .image-wrapper {
+  text-align: center;
+}

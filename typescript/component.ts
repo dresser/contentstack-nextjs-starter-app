@@ -66,6 +66,7 @@ type Widget = {
 
 export type Component = {
   product_hero_block?: ProductHero;
+  product_color_block?: ProductColorBlockModel;
   section?: SectionProps;
   section_with_buckets?: SectionWithBucket;
   from_blog?: FeaturedBlogData;
@@ -138,4 +139,10 @@ export type RenderProps = {
   entryUid: string;
   locale: string;
   pageComponents:Component[];
+}
+
+export type ProductColorBlockModel = {
+  title: string;
+  subtitle: string;
+  product: [ProductPage];
 }

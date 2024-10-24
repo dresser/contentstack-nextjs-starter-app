@@ -10,6 +10,7 @@ import SectionBucket from './section-bucket';
 import AboutSectionBucket from './about-section-bucket';
 import SectionWithHtmlCode from './section-with-html-code';
 import { RenderProps } from "../typescript/component";
+import ProductColorBlock from './product-color-block';
 
 export default function RenderComponents(props: RenderProps) {
   const { pageComponents, blogPost, entryUid, contentTypeUid, locale } = props;
@@ -25,6 +26,14 @@ export default function RenderComponents(props: RenderProps) {
           return (
             <ProductHeroBlock
               hero={component.product_hero_block}
+              key={`component-${key}`}
+            />
+          );
+        }
+        if (component.product_color_block) {
+          return (
+            <ProductColorBlock
+              productColorBlock={component.product_color_block}
               key={`component-${key}`}
             />
           );

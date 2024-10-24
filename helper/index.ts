@@ -49,7 +49,8 @@ export const getPageRes = async (entryUrl: string): Promise<Page> => {
     entryUrl,
     referenceFieldPath: [
       "page_components.product_hero_block.selected_product",
-      "page_components.product_hero_block.button.link"
+      "page_components.product_hero_block.button.link",
+      "page_components.product_color_block.product"
     ],
     jsonRtePath: [
       "page_components.product_hero_block.title"
